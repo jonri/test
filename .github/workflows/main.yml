@@ -34,13 +34,12 @@ jobs:
             sed -i -e '1d' -e 's/:ref:`\(.*\)`/`\1`_/g' $i
           done
           echo "Done"    
-
-      - name: Publish to GitHub Wiki
+                    
+      - name: External repo/wiki sync action
         # You may pin to the exact commit or the version.
-        # uses: SwiftDocOrg/github-wiki-publish-action@a87db85ed06e4431be29cfdcb22b9653881305d0
-        uses: SwiftDocOrg/github-wiki-publish-action@1.0.0
+        # uses: kai-tub/external-repo-sync-action@1f5e84783c1657642a7ed293dee667e72c22dace
+        uses: kai-tub/external-repo-sync-action@v1
         with:
-          # A path to the directory of files to publish
-          path: "wiki_api/"
+          source-directory: wiki_api/
         env:
-          GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          GH_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
