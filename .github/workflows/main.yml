@@ -19,13 +19,35 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: Download File To Workspace
+      - name: Download makerst
         uses: carlosperate/download-file-action@v1.0.3
         with:
           file-url: https://raw.githubusercontent.com/godotengine/godot/3.2/doc/tools/makerst.py
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Export XML documentation to RST
         run: |
-          ls
-          echo Done
+          mkdir wiki_api
+          ./mkrst.py --output wiki_api/ doc_classes/
+          for i in wiki_api/*
+          do
+            sed -i -e '1d' -e 's/:ref:`\(.*\)`/`\1`_/g' $i
+                done
+                
+      - name: Upload files to wiki
+        # You may pin to the exact commit or the version.
+        # uses: Andrew-Chen-Wang/github-wiki-action@b386aca0ddc5ec22b6003ba4cb50fa0b17243f6c
+        uses: Andrew-Chen-Wang/github-wiki-action@v2
+        with:
+          # Directory to rsync files to the wiki.
+          WIKI_DIR: wiki_api/
+          # The GitHub Token for this action to use. Specify secrets.GITHUB_TOKEN.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_MAIL: ${{ secrets.YOUR_EMAIL }}
+          GH_NAME: ${{ github.repository_owner }}
+          # The target repository. Default is the current repo.
+          REPO: # optional
+          # The commit message for the wiki commit. Default is the commit to actual repository.
+          WIKI_PUSH_MESSAGE: # optional
+          # A list of files you want to exclude (separate with spaces).
+          EXCLUDED_FILES: # optional
