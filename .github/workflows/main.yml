@@ -28,7 +28,7 @@ jobs:
       - name: Export XML documentation to RST
         run: |
           mkdir wiki_api
-          ./makerst.py --output wiki_api/ doc_classes/
+          python ./makerst.py --output wiki_api/ doc_classes/
           for i in wiki_api/*
           do
             sed -i -e '1d' -e 's/:ref:`\(.*\)`/`\1`_/g' $i
