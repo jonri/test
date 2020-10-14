@@ -28,11 +28,12 @@ jobs:
       - name: Export XML documentation to RST
         run: |
           mkdir wiki_api
-          python3 ./makerst.py --output wiki_api/ doc_classes/
+          python3 ./makerst.py --output wiki_api/ doc_classes/ || /bin/true
           for i in wiki_api/*
           do
             sed -i -e '1d' -e 's/:ref:`\(.*\)`/`\1`_/g' $i
-                done
+          done
+          echo "Done"    
                 
       - name: Upload files to wiki
         # You may pin to the exact commit or the version.
