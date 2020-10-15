@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <class name="HydroRigidBody" inherits="RigidBody" category="Core" version="3.1">
 	<brief_description>
-		A RigidBody with buoyancy and other related forces when it is inside a [WaterArea].  Testing Github auto-sync wiki again.
+		A RigidBody with buoyancy and other related forces when it is inside a [WaterArea].  Testing Github auto-sync wiki, 3rd time is the charm?
 	</brief_description>
 	<description>
 		When an object enters the water, three forces will be calculated:
