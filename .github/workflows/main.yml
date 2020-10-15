@@ -2,10 +2,10 @@ name: CI
 on:
   push:
     branches: main
-    #paths: doc_classes/
+    paths: doc_classes/*
   pull_request:
     branches: main
-    #paths: doc_classes/
+    paths: doc_classes/*
   
 jobs:
   wiki:
